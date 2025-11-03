@@ -1,5 +1,6 @@
 import pytest
 from main import BooksCollector
+from test_data import BOOKS_FOR_FIXTURE
 
 
 @pytest.fixture
@@ -10,15 +11,7 @@ def collector():
 @pytest.fixture
 def collector_with_books():
     collector = BooksCollector()
-
-    collector.add_new_book("1984")
-    collector.add_new_book("Оно")
-    collector.add_new_book("Ну погоди!")
-    collector.add_new_book("Шерлок Холмс")
-
-    collector.set_book_genre("1984", "Фантастика")
-    collector.set_book_genre("Оно", "Ужасы")
-    collector.set_book_genre("Ну погоди!", "Мультфильмы")
-    collector.set_book_genre("Шерлок Холмс", "Детективы")
-
+    for book_name, genre in BOOKS_FOR_FIXTURE.items():
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre)
     return collector
